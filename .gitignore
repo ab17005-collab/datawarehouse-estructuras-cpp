@@ -1,0 +1,30 @@
+
+# Archivos de compilacion
+build/
+cmake-build-*/
+CMakeFiles/
+CMakeCache.txt
+Makefile
+
+# Ejecutables y objetos
+*.exe
+*.o
+*.obj
+*.out
+*.a
+*.dll
+
+# IDE y editor
+.idea/
+.vscode/
+*.user
+*.suo
+
+# Sistema operativo
+.DS_Store
+Thumbs.db
+
+# Archivos temporales
+*.tmp
+*.log
+*~
