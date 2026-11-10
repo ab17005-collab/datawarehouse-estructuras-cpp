@@ -28,3 +28,8 @@ Thumbs.db
 *.tmp
 *.log
 *~
+
+# Dev-C++ generated files
+Makefile.win
+*.layout
+*.win
