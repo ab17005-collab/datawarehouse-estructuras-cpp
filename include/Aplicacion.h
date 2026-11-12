@@ -9,12 +9,13 @@
 namespace dw {
 inline int ejecutarAplicacion(std::istream& in, std::ostream& out) {
     ContextoAplicacion contexto;
+    contexto.hechos = crearDatosEjemplo();
     olap::ModuloOLAP olap;
     bplus::ModuloBPlus bplus;
     etl::ModuloETL etl;
     int opcion;
     while (true) {
-        out << "\n=== DATA WAREHOUSE V1 ===\n1. Cubo OLAP\n2. Arbol B+\n3. Grafo ETL\n0. Salir\n";
+        out << "\n=== DATA WAREHOUSE V2 ===\n1. Cubo OLAP\n2. Arbol B+\n3. Grafo ETL\n0. Salir\n";
         if (!leerEntero(in, out, "Opcion: ", opcion)) break;
         if (opcion == 0) break;
         switch (opcion) {
