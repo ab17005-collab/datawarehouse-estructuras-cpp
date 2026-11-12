@@ -5,7 +5,7 @@ namespace dw { namespace etl {
 void ModuloETL::ejecutar(ContextoAplicacion&, std::istream& in, std::ostream& out) {
     int opcion;
     while (true) {
-        out << "\n=== Grafo ETL ===\nV2: nodos y aristas; recorridos e impacto aun no disponibles.\n1. Enviar solicitud\n2. Agregar nodo\n3. Agregar arista\n4. Mostrar matriz\n0. Volver\n";
+        out << "\n=== Grafo ETL ===\nV3: BFS; DFS, dependencias e impacto aun no disponibles.\n1. Enviar solicitud\n2. Agregar nodo\n3. Agregar arista\n4. Mostrar matriz\n5. Recorrido BFS\n0. Volver\n";
         if (!leerEntero(in, out, "Opcion: ", opcion) || opcion == 0) return;
         std::string nombre, error;
         if (opcion == 1) {
@@ -24,7 +24,16 @@ void ModuloETL::ejecutar(ContextoAplicacion&, std::istream& in, std::ostream& ou
             if (grafo_.agregarArista(nombre, destino, error)) out << "Arista agregada.\n";
             else out << error << '\n';
         } else if (opcion == 4) grafo_.mostrar(out);
-        else out << "Opcion no valida.\n";
+        else if (opcion == 5) {
+            if (!leerTexto(in, out, "Nodo inicial (ejemplo fuente): ", nombre)) return;
+            std::vector<std::string> recorrido;
+            if (!grafo_.bfs(nombre, recorrido, error)) out << error << '\n';
+            else {
+                out << "BFS:";
+                for (const auto& nodo : recorrido) out << ' ' << nodo;
+                out << '\n';
+            }
+        } else out << "Opcion no valida.\n";
     }
 }
 } }

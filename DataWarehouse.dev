@@ -4,7 +4,7 @@ Name=DataWarehouse
 Type=1
 Ver=2
 IsCpp=1
-UnitCount=18
+UnitCount=19
 Includes=include
 CppCompiler=-std=c++17
 Compiler=
@@ -17,19 +17,6 @@ ObjectOutput=
 OverrideOutput=1
 OverrideOutputName=datawarehouse.exe
 Folders=
-ObjFiles=
-Libs=
-PrivateResource=
-ResourceIncludes=
-MakeIncludes=
-Icon=
-LogOutput=
-LogOutputEnabled=0
-HostApplication=
-CustomMakefile=
-CommandLine=
-IncludeVersionInfo=0
-SupportXPThemes=0
 
 [Unit1]
 FileName=src\bplus\ArbolBPlus.cpp
@@ -142,7 +129,7 @@ OverrideBuildCmd=0
 BuildCmd=
 
 [Unit12]
-FileName=include\CuboOLAP.h
+FileName=include\ColaIndices.h
 CompileCpp=1
 Folder=
 Compile=0
@@ -152,7 +139,7 @@ OverrideBuildCmd=0
 BuildCmd=
 
 [Unit13]
-FileName=include\Entrada.h
+FileName=include\CuboOLAP.h
 CompileCpp=1
 Folder=
 Compile=0
@@ -162,7 +149,7 @@ OverrideBuildCmd=0
 BuildCmd=
 
 [Unit14]
-FileName=include\GrafoETL.h
+FileName=include\Entrada.h
 CompileCpp=1
 Folder=
 Compile=0
@@ -172,7 +159,7 @@ OverrideBuildCmd=0
 BuildCmd=
 
 [Unit15]
-FileName=include\Modelo.h
+FileName=include\GrafoETL.h
 CompileCpp=1
 Folder=
 Compile=0
@@ -182,7 +169,7 @@ OverrideBuildCmd=0
 BuildCmd=
 
 [Unit16]
-FileName=include\ModuloBPlus.h
+FileName=include\Modelo.h
 CompileCpp=1
 Folder=
 Compile=0
@@ -192,7 +179,7 @@ OverrideBuildCmd=0
 BuildCmd=
 
 [Unit17]
-FileName=include\ModuloETL.h
+FileName=include\ModuloBPlus.h
 CompileCpp=1
 Folder=
 Compile=0
@@ -202,7 +189,7 @@ OverrideBuildCmd=0
 BuildCmd=
 
 [Unit18]
-FileName=include\ModuloOLAP.h
+FileName=include\ModuloETL.h
 CompileCpp=1
 Folder=
 Compile=0
@@ -211,22 +198,12 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[VersionInfo]
-Major=0
-Minor=1
-Release=1
-Build=1
-LanguageID=1033
-CharsetID=1252
-CompanyName=
-FileVersion=0.1
-FileDescription=Developed using the Embarcadero Dev-C++ IDE
-InternalName=
-LegalCopyright=
-LegalTrademarks=
-OriginalFilename=datawarehouse.exe
-ProductName=DataWarehouse
-ProductVersion=0.1.1.1
-AutoIncBuildNr=0
-SyncProduct=0
-
+[Unit19]
+FileName=include\ModuloOLAP.h
+CompileCpp=1
+Folder=
+Compile=0
+Link=0
+Priority=1000
+OverrideBuildCmd=0
+BuildCmd=

@@ -1,4 +1,4 @@
-	#ifndef DW_APLICACION_H
+#ifndef DW_APLICACION_H
 #define DW_APLICACION_H
 #include "Modelo.h"
 #include "Entrada.h"
@@ -15,7 +15,7 @@ inline int ejecutarAplicacion(std::istream& in, std::ostream& out) {
     etl::ModuloETL etl;
     int opcion;
     while (true) {
-        out << "\n=== DATA WAREHOUSE V2 ===\n1. Cubo OLAP\n2. Arbol B+\n3. Grafo ETL\n0. Salir\n";
+        out << "\n=== DATA WAREHOUSE V3 ===\n1. Cubo OLAP\n2. Arbol B+\n3. Grafo ETL\n0. Salir\n";
         if (!leerEntero(in, out, "Opcion: ", opcion)) break;
         if (opcion == 0) break;
         switch (opcion) {

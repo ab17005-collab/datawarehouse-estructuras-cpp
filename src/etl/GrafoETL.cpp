@@ -1,5 +1,6 @@
 #include "GrafoETL.h"
 #include <ostream>
+#include "ColaIndices.h"
 namespace dw { namespace etl {
 int GrafoETL::indice(const std::string& nombre) const {
     for (std::size_t i = 0; i < cantidad_; ++i)
@@ -41,5 +42,27 @@ void GrafoETL::mostrar(std::ostream& out) const {
         for (std::size_t j = 0; j < cantidad_; ++j) out << (matriz_[i][j] ? 1 : 0) << ' ';
         out << '\n';
     }
+}
+
+bool GrafoETL::bfs(const std::string& origen, std::vector<std::string>& recorrido, std::string& error) const {
+    const int inicio = indice(origen);
+    if (inicio < 0) { error = "Nodo inexistente."; return false; }
+    bool visitados[Capacidad] = {};
+    ColaIndices cola;
+    std::vector<std::string> temporal;
+    cola.insertar(inicio); visitados[inicio] = true;
+    int actual;
+    while (cola.remover(actual)) {
+        temporal.push_back(nodos_[actual].nombre);
+        for (std::size_t j = 0; j < cantidad_; ++j) {
+            if (matriz_[actual][j] && !visitados[j]) {
+                visitados[j] = true; // Marcar al encolar evita duplicados en convergencias.
+                cola.insertar(static_cast<int>(j));
+            }
+        }
+    }
+    recorrido.swap(temporal);
+    error.clear();
+    return true;
 }
 } }
