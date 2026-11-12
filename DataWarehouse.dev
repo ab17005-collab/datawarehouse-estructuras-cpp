@@ -4,7 +4,7 @@ Name=DataWarehouse
 Type=1
 Ver=2
 IsCpp=1
-UnitCount=11
+UnitCount=18
 Includes=include
 CppCompiler=-std=c++17
 Compiler=
@@ -19,7 +19,7 @@ OverrideOutputName=datawarehouse.exe
 Folders=
 
 [Unit1]
-FileName=src\bplus\ModuloBPlus.cpp
+FileName=src\bplus\ArbolBPlus.cpp
 CompileCpp=1
 Folder=
 Compile=1
@@ -29,7 +29,7 @@ OverrideBuildCmd=0
 BuildCmd=
 
 [Unit2]
-FileName=src\common\Entrada.cpp
+FileName=src\bplus\ModuloBPlus.cpp
 CompileCpp=1
 Folder=
 Compile=1
@@ -39,7 +39,7 @@ OverrideBuildCmd=0
 BuildCmd=
 
 [Unit3]
-FileName=src\etl\ModuloETL.cpp
+FileName=src\common\Entrada.cpp
 CompileCpp=1
 Folder=
 Compile=1
@@ -49,7 +49,7 @@ OverrideBuildCmd=0
 BuildCmd=
 
 [Unit4]
-FileName=src\main.cpp
+FileName=src\common\Modelo.cpp
 CompileCpp=1
 Folder=
 Compile=1
@@ -59,7 +59,7 @@ OverrideBuildCmd=0
 BuildCmd=
 
 [Unit5]
-FileName=src\olap\ModuloOLAP.cpp
+FileName=src\etl\GrafoETL.cpp
 CompileCpp=1
 Folder=
 Compile=1
@@ -69,6 +69,46 @@ OverrideBuildCmd=0
 BuildCmd=
 
 [Unit6]
+FileName=src\etl\ModuloETL.cpp
+CompileCpp=1
+Folder=
+Compile=1
+Link=1
+Priority=1000
+OverrideBuildCmd=0
+BuildCmd=
+
+[Unit7]
+FileName=src\main.cpp
+CompileCpp=1
+Folder=
+Compile=1
+Link=1
+Priority=1000
+OverrideBuildCmd=0
+BuildCmd=
+
+[Unit8]
+FileName=src\olap\CuboOLAP.cpp
+CompileCpp=1
+Folder=
+Compile=1
+Link=1
+Priority=1000
+OverrideBuildCmd=0
+BuildCmd=
+
+[Unit9]
+FileName=src\olap\ModuloOLAP.cpp
+CompileCpp=1
+Folder=
+Compile=1
+Link=1
+Priority=1000
+OverrideBuildCmd=0
+BuildCmd=
+
+[Unit10]
 FileName=include\Aplicacion.h
 CompileCpp=1
 Folder=
@@ -78,7 +118,27 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit7]
+[Unit11]
+FileName=include\ArbolBPlus.h
+CompileCpp=1
+Folder=
+Compile=0
+Link=0
+Priority=1000
+OverrideBuildCmd=0
+BuildCmd=
+
+[Unit12]
+FileName=include\CuboOLAP.h
+CompileCpp=1
+Folder=
+Compile=0
+Link=0
+Priority=1000
+OverrideBuildCmd=0
+BuildCmd=
+
+[Unit13]
 FileName=include\Entrada.h
 CompileCpp=1
 Folder=
@@ -88,7 +148,17 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit8]
+[Unit14]
+FileName=include\GrafoETL.h
+CompileCpp=1
+Folder=
+Compile=0
+Link=0
+Priority=1000
+OverrideBuildCmd=0
+BuildCmd=
+
+[Unit15]
 FileName=include\Modelo.h
 CompileCpp=1
 Folder=
@@ -98,7 +168,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit9]
+[Unit16]
 FileName=include\ModuloBPlus.h
 CompileCpp=1
 Folder=
@@ -108,7 +178,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit10]
+[Unit17]
 FileName=include\ModuloETL.h
 CompileCpp=1
 Folder=
@@ -118,7 +188,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit11]
+[Unit18]
 FileName=include\ModuloOLAP.h
 CompileCpp=1
 Folder=
