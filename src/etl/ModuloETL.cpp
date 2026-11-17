@@ -5,7 +5,7 @@ namespace dw { namespace etl {
 void ModuloETL::ejecutar(ContextoAplicacion&, std::istream& in, std::ostream& out) {
     int opcion;
     while (true) {
-        out << "\n=== Grafo ETL ===\nV3: BFS; DFS, dependencias e impacto aun no disponibles.\n1. Enviar solicitud\n2. Agregar nodo\n3. Agregar arista\n4. Mostrar matriz\n5. Recorrido BFS\n0. Volver\n";
+        out << "\n=== Grafo ETL ===\nV5: impacto de cambios y deteccion de ciclos.\n1. Enviar solicitud\n2. Agregar nodo\n3. Agregar arista\n4. Mostrar matriz\n5. Recorrido BFS\n6. Recorrido DFS\n7. Dependencias directas\n8. Dependencias transitivas\n9. Impacto de un cambio\n10. Detectar ciclos\n0. Volver\n";
         if (!leerEntero(in, out, "Opcion: ", opcion) || opcion == 0) return;
         std::string nombre, error;
         if (opcion == 1) {
@@ -31,6 +31,36 @@ void ModuloETL::ejecutar(ContextoAplicacion&, std::istream& in, std::ostream& ou
             else {
                 out << "BFS:";
                 for (const auto& nodo : recorrido) out << ' ' << nodo;
+                out << '\n';
+            }
+        } else if (opcion >= 6 && opcion <= 8) {
+            if (!leerTexto(in, out, opcion == 6 ? "Nodo inicial (ejemplo fuente): " : "Nodo consultado (ejemplo hechos): ", nombre)) return;
+            std::vector<std::string> resultado;
+            const bool ok = opcion == 6 ? grafo_.dfs(nombre, resultado, error)
+                : grafo_.dependencias(nombre, opcion == 8, resultado, error);
+            if (!ok) out << error << '\n';
+            else {
+                out << (opcion == 6 ? "DFS:" : opcion == 7 ? "Dependencias directas:" : "Dependencias transitivas:");
+                for (const auto& nodo : resultado) out << ' ' << nodo;
+                if (resultado.empty()) out << " (ninguna)";
+                out << '\n';
+            }
+        } else if (opcion == 9) {
+            if (!leerTexto(in,out,"Nodo que cambia (ejemplo fuente): ",nombre)) return;
+            std::vector<std::string> afectados;
+            if (!grafo_.impacto(nombre,afectados,error)) out << error << '\n';
+            else {
+                out << "Impacto:";
+                for (const auto& afectado : afectados) out << ' ' << afectado;
+                if (afectados.empty()) out << " (ninguno)";
+                out << '\n';
+            }
+        } else if (opcion == 10) {
+            std::vector<std::string> ciclo;
+            if (!grafo_.detectarCiclo(ciclo)) out << "Sin ciclos: flujo ETL aciclico.\n";
+            else {
+                out << "Ciclo detectado: ";
+                for (std::size_t i = 0; i < ciclo.size(); ++i) out << (i ? " -> " : "") << ciclo[i];
                 out << '\n';
             }
         } else out << "Opcion no valida.\n";

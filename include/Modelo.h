@@ -22,6 +22,8 @@ struct TablaHechos {
     // Sin borrado: una posicion permanece estable aunque vector se realoque.
     bool posicionDe(int id, std::size_t& posicion) const;
     const Venta* obtener(int id) const;
+    bool validarInsercion(const Venta&, std::string& error) const;
+    bool insertar(Venta venta, std::string& error);
 };
 TablaHechos crearDatosEjemplo();
 struct ContextoAplicacion { TablaHechos hechos; };

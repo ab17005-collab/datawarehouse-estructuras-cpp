@@ -65,4 +65,77 @@ bool GrafoETL::bfs(const std::string& origen, std::vector<std::string>& recorrid
     error.clear();
     return true;
 }
+
+void GrafoETL::dfsDesde(int actual, bool visitados[], std::vector<std::string>& recorrido) const {
+    visitados[actual] = true;
+    recorrido.push_back(nodos_[actual].nombre);
+    for (std::size_t i = 0; i < cantidad_; ++i)
+        if (matriz_[actual][i] && !visitados[i]) dfsDesde(static_cast<int>(i), visitados, recorrido);
+}
+bool GrafoETL::dfs(const std::string& origen, std::vector<std::string>& recorrido, std::string& error) const {
+    const int inicio = indice(origen);
+    if (inicio < 0) { error = "Nodo inexistente."; return false; }
+    bool visitados[Capacidad] = {};
+    std::vector<std::string> temporal;
+    dfsDesde(inicio, visitados, temporal);
+    recorrido.swap(temporal);
+    error.clear();
+    return true;
+}
+void GrafoETL::marcarAntecesores(int actual, bool visitados[]) const {
+    visitados[actual] = true;
+    for (std::size_t i = 0; i < cantidad_; ++i)
+        if (matriz_[i][actual] && !visitados[i]) marcarAntecesores(static_cast<int>(i), visitados);
+}
+bool GrafoETL::dependencias(const std::string& destino, bool transitivas, std::vector<std::string>& resultado, std::string& error) const {
+    const int fin = indice(destino);
+    if (fin < 0) { error = "Nodo inexistente."; return false; }
+    bool visitados[Capacidad] = {};
+    if (transitivas) marcarAntecesores(fin, visitados);
+    else for (std::size_t i = 0; i < cantidad_; ++i) visitados[i] = matriz_[i][fin];
+    std::vector<std::string> temporal;
+    for (std::size_t i = 0; i < cantidad_; ++i)
+        if (visitados[i] && static_cast<int>(i) != fin) temporal.push_back(nodos_[i].nombre);
+    resultado.swap(temporal);
+    error.clear();
+    return true;
+}
+
+
+bool GrafoETL::impacto(const std::string& origen, std::vector<std::string>& resultado, std::string& error) const {
+    std::vector<std::string> recorrido;
+    if (!bfs(origen,recorrido,error)) return false;
+    recorrido.erase(recorrido.begin()); // BFS siempre incluye primero al origen existente.
+    resultado.swap(recorrido);
+    error.clear(); return true;
+}
+bool GrafoETL::cicloDesde(int actual, int colores[], std::vector<int>& pila, std::vector<std::string>& testigo) const {
+    colores[actual] = 1; pila.push_back(actual);
+    for (std::size_t i = 0; i < cantidad_; ++i) {
+        if (!matriz_[actual][i]) continue;
+        if (colores[i] == 1) {
+            bool copiar = false;
+            for (int vertice : pila) {
+                if (vertice == static_cast<int>(i)) copiar = true;
+                if (copiar) testigo.push_back(nodos_[vertice].nombre);
+            }
+            testigo.push_back(nodos_[i].nombre);
+            return true;
+        }
+        if (colores[i] == 0 && cicloDesde(static_cast<int>(i),colores,pila,testigo)) return true;
+    }
+    pila.pop_back(); colores[actual] = 2;
+    return false;
+}
+bool GrafoETL::detectarCiclo(std::vector<std::string>& testigo) const {
+    int colores[Capacidad] = {};
+    std::vector<int> pila;
+    std::vector<std::string> temporal;
+    for (std::size_t i = 0; i < cantidad_; ++i)
+        if (colores[i] == 0 && cicloDesde(static_cast<int>(i),colores,pila,temporal)) {
+            testigo.swap(temporal); return true;
+        }
+    testigo.clear(); return false;
+}
+
 } }

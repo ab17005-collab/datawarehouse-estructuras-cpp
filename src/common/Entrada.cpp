@@ -28,4 +28,16 @@ bool leerTexto(std::istream& in, std::ostream& out, const std::string& mensaje, 
         out << "Entrada invalida: el texto no puede estar vacio.\n";
     }
 }
+bool leerEntero64(std::istream& in, std::ostream& out, const std::string& mensaje, std::int64_t& valor) {
+    std::string linea;
+    while (true) {
+        out << mensaje;
+        if (!std::getline(in,linea)) return false;
+        std::istringstream parser(linea);
+        std::int64_t candidato;
+        if ((parser >> candidato) && (parser >> std::ws).eof()) { valor = candidato; return true; }
+        out << "Entrada invalida: ingrese centavos enteros de 64 bits.\n";
+    }
+}
+
 }

@@ -1,4 +1,6 @@
 #include "Modelo.h"
+#include <limits>
+#include <utility>
 namespace dw {
 bool fechaValida(const Fecha& f) {
     if (f.anio < 1 || f.anio > 9999 || f.mes < 1 || f.mes > 12) return false;
@@ -31,5 +33,29 @@ TablaHechos crearDatosEjemplo() {
     };
     tabla.revision = 1;
     return tabla;
+}
+bool TablaHechos::validarInsercion(const Venta& nueva, std::string& error) const {
+    if (!ventaValida(nueva)) { error = "Venta invalida: revise ID, fecha, textos, unidades e importe."; return false; }
+    std::size_t posicion;
+    if (posicionDe(nueva.id,posicion)) { error = "ID de venta duplicado; datos sin cambios."; return false; }
+    if (revision == std::numeric_limits<std::uint64_t>::max()) { error = "Revision agotada; datos sin cambios."; return false; }
+    std::int64_t importe = nueva.importeCentavos, unidades = nueva.unidades;
+    for (const auto& venta : ventas) {
+        if (!ventaValida(venta)) { error = "Tabla contiene una venta invalida."; return false; }
+        if (venta.importeCentavos > std::numeric_limits<std::int64_t>::max()-importe
+            || venta.unidades > std::numeric_limits<std::int64_t>::max()-unidades) {
+            error = "Desbordamiento del agregado; datos sin cambios."; return false;
+        }
+        importe += venta.importeCentavos; unidades += venta.unidades;
+    }
+    error.clear();
+    return true;
+}
+bool TablaHechos::insertar(Venta venta, std::string& error) {
+    if (!validarInsercion(venta,error)) return false;
+    ventas.push_back(std::move(venta));
+    ++revision;
+    error.clear();
+    return true;
 }
 }
