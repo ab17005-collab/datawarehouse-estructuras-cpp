@@ -1,6 +1,8 @@
 #include "GrafoETL.h"
 #include <ostream>
 #include "ColaIndices.h"
+#include "CSV.h"
+#include <utility>
 namespace dw { namespace etl {
 int GrafoETL::indice(const std::string& nombre) const {
     for (std::size_t i = 0; i < cantidad_; ++i)
@@ -136,6 +138,36 @@ bool GrafoETL::detectarCiclo(std::vector<std::string>& testigo) const {
             testigo.swap(temporal); return true;
         }
     testigo.clear(); return false;
+}
+
+
+bool GrafoETL::importarCSV(std::istream& in, std::string& error) {
+    std::vector<FilaCSV> filas;
+    if (!leerCSV(in,{"clase","nombre","tipo","origen","destino"},filas,error)) return false;
+    GrafoETL temporal = *this;
+    for (const auto& fila : filas) {
+        const auto& c = fila.campos;
+        if (c[0] == "nodo") {
+            TipoNodo tipo;
+            if (c[2] == "fuente") tipo = TipoNodo::Fuente;
+            else if (c[2] == "tabla") tipo = TipoNodo::Tabla;
+            else if (c[2] == "proceso") tipo = TipoNodo::Proceso;
+            else { error = "Linea " + std::to_string(fila.linea) + ": tipo ETL invalido."; return false; }
+            if (!c[3].empty() || !c[4].empty()) { error = "Linea " + std::to_string(fila.linea) + ": nodo con extremos de arista."; return false; }
+            if (!temporal.agregarNodo(c[1],tipo,error)) { error = "Linea " + std::to_string(fila.linea) + ": " + error; return false; }
+        } else if (c[0] != "arista" || !c[1].empty() || !c[2].empty()) {
+            error = "Linea " + std::to_string(fila.linea) + ": clase o campos ETL invalidos."; return false;
+        }
+    }
+    // Dos pasadas: se permite declarar una arista antes que sus nodos.
+    for (const auto& fila : filas) {
+        const auto& c = fila.campos;
+        if (c[0] == "arista" && !temporal.agregarArista(c[3],c[4],error)) {
+            error = "Linea " + std::to_string(fila.linea) + ": " + error; return false;
+        }
+    }
+    *this = std::move(temporal);
+    error.clear(); return true;
 }
 
 } }

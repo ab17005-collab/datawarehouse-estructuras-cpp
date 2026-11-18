@@ -17,6 +17,7 @@ public:
     bool buscar(int clave, std::size_t& posicion) const;
     std::size_t cantidad() const { return cantidad_; }
     int altura() const;
+    void intercambiar(ArbolBPlus&) noexcept;
     bool validar(std::string& error) const;
     void mostrar(std::ostream&) const;
     bool consultarRango(int desde, int hasta, std::vector<EntradaIndice>& resultado, std::string& error) const;

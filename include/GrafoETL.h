@@ -19,6 +19,7 @@ public:
     // Orden de indice de alta; transitivas=true incluye todos los antecesores.
     bool dependencias(const std::string& destino, bool transitivas, std::vector<std::string>& resultado, std::string& error) const;
     bool impacto(const std::string& origen, std::vector<std::string>& resultado, std::string& error) const;
+    bool importarCSV(std::istream&, std::string& error);
     bool detectarCiclo(std::vector<std::string>& testigo) const;
 private:
     bool cicloDesde(int actual, int colores[], std::vector<int>& pila, std::vector<std::string>& testigo) const;

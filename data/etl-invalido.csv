@@ -1,0 +1,3 @@
+clase,nombre,tipo,origen,destino
+nodo,nuevo,tabla,,
+arista,,,nuevo,no_existe

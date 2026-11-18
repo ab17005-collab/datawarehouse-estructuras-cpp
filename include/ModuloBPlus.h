@@ -6,6 +6,7 @@ namespace dw { namespace bplus {
 class ModuloBPlus {
     ArbolBPlus indice_;
 public:
+    bool importarVentas(std::istream&, ContextoAplicacion&, std::string& error);
     bool insertarVenta(ContextoAplicacion&, const Venta&, std::string& error);
     bool validarIndice(const ContextoAplicacion&, std::string& error) const;
     const ArbolBPlus& indice() const { return indice_; }

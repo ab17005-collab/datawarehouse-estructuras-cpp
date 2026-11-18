@@ -1,11 +1,13 @@
 #include "ModuloETL.h"
 #include "Entrada.h"
 #include <iostream>
+#include <fstream>
+#include <new>
 namespace dw { namespace etl {
 void ModuloETL::ejecutar(ContextoAplicacion&, std::istream& in, std::ostream& out) {
     int opcion;
     while (true) {
-        out << "\n=== Grafo ETL ===\nV5: impacto de cambios y deteccion de ciclos.\n1. Enviar solicitud\n2. Agregar nodo\n3. Agregar arista\n4. Mostrar matriz\n5. Recorrido BFS\n6. Recorrido DFS\n7. Dependencias directas\n8. Dependencias transitivas\n9. Impacto de un cambio\n10. Detectar ciclos\n0. Volver\n";
+        out << "\n=== Grafo ETL ===\nV6: carga CSV de escenario ETL y analisis completo.\n1. Enviar solicitud\n2. Agregar nodo\n3. Agregar arista\n4. Mostrar matriz\n5. Recorrido BFS\n6. Recorrido DFS\n7. Dependencias directas\n8. Dependencias transitivas\n9. Impacto de un cambio\n10. Detectar ciclos\n11. Importar escenario CSV\n0. Volver\n";
         if (!leerEntero(in, out, "Opcion: ", opcion) || opcion == 0) return;
         std::string nombre, error;
         if (opcion == 1) {
@@ -63,6 +65,17 @@ void ModuloETL::ejecutar(ContextoAplicacion&, std::istream& in, std::ostream& ou
                 for (std::size_t i = 0; i < ciclo.size(); ++i) out << (i ? " -> " : "") << ciclo[i];
                 out << '\n';
             }
+        } else if (opcion == 11) {
+            std::string ruta;
+            if (!leerTexto(in,out,"Archivo ETL (ejemplo data/etl.csv): ",ruta)) return;
+            std::ifstream archivo(ruta);
+            if (!archivo) { out << "No se pudo abrir el archivo ETL; grafo sin cambios.\n"; continue; }
+            const auto antes = grafo_.cantidad();
+            try {
+                if (grafo_.importarCSV(archivo,error)) out << "CSV ETL cargado: " << grafo_.cantidad()-antes
+                    << " nodos agregados; total: " << grafo_.cantidad() << '\n';
+                else out << "Carga rechazada; grafo sin cambios. " << error << '\n';
+            } catch (const std::bad_alloc&) { out << "Memoria insuficiente; grafo sin cambios.\n"; }
         } else out << "Opcion no valida.\n";
     }
 }

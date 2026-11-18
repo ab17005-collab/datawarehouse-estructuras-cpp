@@ -1,0 +1,10 @@
+clase,nombre,tipo,origen,destino
+nodo,fuente,fuente,,
+nodo,limpieza,proceso,,
+nodo,validacion,proceso,,
+nodo,hechos,tabla,,
+nodo,aislado,tabla,,
+arista,,,fuente,limpieza
+arista,,,fuente,validacion
+arista,,,limpieza,hechos
+arista,,,validacion,hechos
