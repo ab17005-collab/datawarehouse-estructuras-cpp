@@ -54,6 +54,8 @@ bool CuboOLAP::reconstruir(const TablaHechos& tabla, std::string& error) {
         }
     }
     std::swap(raiz_, temporal.raiz_);
+    ruta_.clear();
+    origen_ = nullptr;
     error.clear();
     return true;
 }
@@ -87,4 +89,68 @@ void CuboOLAP::mostrarJerarquia(std::ostream& out) const {
     if (!raiz_) out << "Jerarquia no construida.\n";
     else mostrar(raiz_, 0, out);
 }
+
+const CuboOLAP::Nodo* CuboOLAP::nodoActual() const {
+    const Nodo* actual = raiz_;
+    for (int valor : ruta_) {
+        if (!actual) return nullptr;
+        actual = actual->hijo;
+        while (actual && actual->valor != valor) actual = actual->hermano;
+    }
+    return actual;
+}
+bool CuboOLAP::vistaActual(VistaTemporal& resultado, std::string& error) const {
+    const Nodo* actual = nodoActual();
+    if (!actual) { error = "Primero reconstruya la jerarquia."; return false; }
+    VistaTemporal temporal;
+    temporal.nivel = static_cast<int>(ruta_.size());
+    temporal.valor = actual->valor;
+    temporal.total = actual->total;
+    for (const Nodo* hijo = actual->hijo; hijo; hijo = hijo->hermano)
+        temporal.hijos.push_back({hijo->valor, hijo->total});
+    resultado = temporal;
+    error.clear();
+    return true;
+}
+bool CuboOLAP::drillDown(int valorHijo, std::string& error) {
+    const Nodo* actual = nodoActual();
+    if (!actual) { error = "Primero reconstruya la jerarquia."; return false; }
+    if (ruta_.size() == 3) { error = "El dia es el nivel mas detallado."; return false; }
+    for (const Nodo* hijo = actual->hijo; hijo; hijo = hijo->hermano) {
+        if (hijo->valor == valorHijo) { ruta_.push_back(valorHijo); error.clear(); return true; }
+    }
+    error = "No existe ese hijo en la vista actual.";
+    return false;
+}
+bool CuboOLAP::rollUp(std::string& error) {
+    if (!raiz_) { error = "Primero reconstruya la jerarquia."; return false; }
+    if (ruta_.empty()) { error = "Ya esta en el total general."; return false; }
+    ruta_.pop_back();
+    error.clear();
+    return true;
+}
+
+
+bool CuboOLAP::actualizar(const TablaHechos& tabla, const FiltroVentas& filtro, std::string& error) {
+    if (raiz_ && origen_ == &tabla && revision_ == tabla.revision
+        && filtroConstruido_.sucursal == filtro.sucursal && filtroConstruido_.categoria == filtro.categoria) {
+        error.clear(); return true;
+    }
+    Agregado validacion;
+    if (!consultarTotal(tabla,validacion,error)) return false;
+    FiltroVentas copia = filtro;
+    TablaHechos seleccion;
+    for (const auto& venta : tabla.ventas)
+        if ((filtro.sucursal.empty() || filtro.sucursal == venta.sucursal)
+            && (filtro.categoria.empty() || filtro.categoria == venta.categoria)) seleccion.ventas.push_back(venta);
+    if (!reconstruir(seleccion,error)) return false;
+    filtroConstruido_ = std::move(copia);
+    origen_ = &tabla; revision_ = tabla.revision;
+    return true;
+}
+bool CuboOLAP::consultarTotalFiltrado(Agregado& resultado, std::string& error) const {
+    if (!raiz_) { error = "Primero reconstruya la jerarquia."; return false; }
+    resultado = raiz_->total; error.clear(); return true;
+}
+
 } }
