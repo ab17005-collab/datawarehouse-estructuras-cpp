@@ -1,0 +1,110 @@
+<mxfile host="Electron" agent="5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) draw.io/14.4.3 Chrome/87.0.4280.141 Electron/11.3.0 Safari/537.36" compressed="false" modified="2026-11-18T02:02:59.822Z" version="14.4.3" etag="plt_qwc0lviVnRS0gJUN" type="device">
+  <diagram id="dominio-supermercados" name="Modelo del dominio">
+    <mxGraphModel dx="1420" dy="810" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1200" pageHeight="900" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="titulo" value="Modelo del dominio — Ventas de supermercados" style="text;html=0;whiteSpace=wrap;align=center;verticalAlign=middle;fontFamily=Helvetica;fontSize=24;fontColor=#000000;fontStyle=1;" parent="1" vertex="1">
+          <mxGeometry x="40" y="25" width="1120" height="45" as="geometry" />
+        </mxCell>
+        <mxCell id="subtitulo" value="Conceptos del caso hipotético y relaciones principales" style="text;html=0;whiteSpace=wrap;align=center;verticalAlign=middle;fontFamily=Helvetica;fontSize=15;fontColor=#000000;fontStyle=0;" parent="1" vertex="1">
+          <mxGeometry x="40" y="70" width="1120" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="sucursal" value="&lt;b&gt;Sucursal&lt;/b&gt;&lt;br&gt;&lt;br&gt;nombre" style="rounded=0;whiteSpace=wrap;html=1;align=center;verticalAlign=middle;spacing=10;fontFamily=Helvetica;fontSize=15;fontColor=#000000;fillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;" parent="1" vertex="1">
+          <mxGeometry x="85" y="152" width="215" height="98" as="geometry" />
+        </mxCell>
+        <mxCell id="fecha" value="&lt;b&gt;Fecha&lt;/b&gt;&lt;br&gt;&lt;br&gt;día · mes · año" style="rounded=0;whiteSpace=wrap;html=1;align=center;verticalAlign=middle;spacing=10;fontFamily=Helvetica;fontSize=15;fontColor=#000000;fillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;" parent="1" vertex="1">
+          <mxGeometry x="492" y="148" width="218" height="100" as="geometry" />
+        </mxCell>
+        <mxCell id="categoria" value="&lt;b&gt;Categoría&lt;/b&gt;&lt;br&gt;&lt;br&gt;nombre" style="rounded=0;whiteSpace=wrap;html=1;align=center;verticalAlign=middle;spacing=10;fontFamily=Helvetica;fontSize=15;fontColor=#000000;fillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;" parent="1" vertex="1">
+          <mxGeometry x="898" y="151" width="220" height="99" as="geometry" />
+        </mxCell>
+        <mxCell id="venta" value="&lt;b&gt;Venta&lt;/b&gt;&lt;br&gt;&lt;br&gt;ID · unidades · importe total" style="rounded=0;whiteSpace=wrap;html=1;align=center;verticalAlign=middle;spacing=10;fontFamily=Helvetica;fontSize=15;fontColor=#000000;fillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;" parent="1" vertex="1">
+          <mxGeometry x="472" y="382" width="256" height="128" as="geometry" />
+        </mxCell>
+        <mxCell id="fuente" value="&lt;b&gt;Fuente de datos&lt;/b&gt;&lt;br&gt;&lt;br&gt;nombre" style="rounded=0;whiteSpace=wrap;html=1;align=center;verticalAlign=middle;spacing=10;fontFamily=Helvetica;fontSize=15;fontColor=#000000;fillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;" parent="1" vertex="1">
+          <mxGeometry x="82" y="632" width="218" height="98" as="geometry" />
+        </mxCell>
+        <mxCell id="proceso" value="&lt;b&gt;Proceso ETL&lt;/b&gt;&lt;br&gt;&lt;br&gt;nombre" style="rounded=0;whiteSpace=wrap;html=1;align=center;verticalAlign=middle;spacing=10;fontFamily=Helvetica;fontSize=15;fontColor=#000000;fillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;" parent="1" vertex="1">
+          <mxGeometry x="490" y="630" width="220" height="100" as="geometry" />
+        </mxCell>
+        <mxCell id="tabla" value="&lt;b&gt;Tabla de hechos&lt;/b&gt;&lt;br&gt;&lt;br&gt;registros de ventas" style="rounded=0;whiteSpace=wrap;html=1;align=center;verticalAlign=middle;spacing=10;fontFamily=Helvetica;fontSize=15;fontColor=#000000;fillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;" parent="1" vertex="1">
+          <mxGeometry x="902" y="629" width="218" height="101" as="geometry" />
+        </mxCell>
+        <mxCell id="r-sucursal" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#000000;strokeWidth=1.5;endArrow=none;endFill=0;startArrow=none;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" parent="1" source="sucursal" target="venta" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="192" y="446" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="r-fecha" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#000000;strokeWidth=1.5;endArrow=none;endFill=0;startArrow=none;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" parent="1" source="fecha" target="venta" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="r-categoria" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#000000;strokeWidth=1.5;endArrow=none;endFill=0;startArrow=none;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=1;entryY=0.5;entryDx=0;entryDy=0;" parent="1" source="categoria" target="venta" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="1008" y="446" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="r-contiene" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#000000;strokeWidth=1.5;endArrow=none;endFill=0;startArrow=none;exitX=0.5;exitY=0;exitDx=0;exitDy=0;entryX=0.5;entryY=1;entryDx=0;entryDy=0;" parent="1" source="tabla" target="venta" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="1011" y="570" />
+              <mxPoint x="600" y="570" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="r-alimenta" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#000000;strokeWidth=1.5;endArrow=open;endFill=0;startArrow=none;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" parent="1" source="fuente" target="proceso" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="r-abastece" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#000000;strokeWidth=1.5;endArrow=open;endFill=0;startArrow=none;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" parent="1" source="proceso" target="tabla" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="label-registra" value="registra" style="text;html=0;whiteSpace=wrap;align=center;verticalAlign=middle;fontFamily=Helvetica;fontSize=14;fontColor=#000000;fontStyle=0;" parent="1" vertex="1">
+          <mxGeometry x="285" y="414" width="150" height="26" as="geometry" />
+        </mxCell>
+        <mxCell id="label-fecha" value="ocurre en" style="text;html=0;whiteSpace=wrap;align=center;verticalAlign=middle;fontFamily=Helvetica;fontSize=14;fontColor=#000000;fontStyle=0;" parent="1" vertex="1">
+          <mxGeometry x="615" y="295" width="120" height="26" as="geometry" />
+        </mxCell>
+        <mxCell id="label-categoria" value="clasifica" style="text;html=0;whiteSpace=wrap;align=center;verticalAlign=middle;fontFamily=Helvetica;fontSize=14;fontColor=#000000;fontStyle=0;" parent="1" vertex="1">
+          <mxGeometry x="770" y="414" width="150" height="26" as="geometry" />
+        </mxCell>
+        <mxCell id="label-contiene" value="contiene" style="text;html=0;whiteSpace=wrap;align=center;verticalAlign=middle;fontFamily=Helvetica;fontSize=14;fontColor=#000000;fontStyle=0;" parent="1" vertex="1">
+          <mxGeometry x="740" y="538" width="140" height="26" as="geometry" />
+        </mxCell>
+        <mxCell id="label-alimenta" value="alimenta" style="text;html=0;whiteSpace=wrap;align=center;verticalAlign=middle;fontFamily=Helvetica;fontSize=14;fontColor=#000000;fontStyle=0;" parent="1" vertex="1">
+          <mxGeometry x="335" y="644" width="120" height="26" as="geometry" />
+        </mxCell>
+        <mxCell id="label-abastece" value="abastece" style="text;html=0;whiteSpace=wrap;align=center;verticalAlign=middle;fontFamily=Helvetica;fontSize=14;fontColor=#000000;fontStyle=0;" parent="1" vertex="1">
+          <mxGeometry x="745" y="644" width="120" height="26" as="geometry" />
+        </mxCell>
+        <mxCell id="m-suc-1" value="1" style="text;html=0;whiteSpace=wrap;align=center;verticalAlign=middle;fontFamily=Helvetica;fontSize=14;fontColor=#000000;fontStyle=0;" parent="1" vertex="1">
+          <mxGeometry x="200" y="260" width="35" height="24" as="geometry" />
+        </mxCell>
+        <mxCell id="m-suc-n" value="0..*" style="text;html=0;whiteSpace=wrap;align=center;verticalAlign=middle;fontFamily=Helvetica;fontSize=14;fontColor=#000000;fontStyle=0;" parent="1" vertex="1">
+          <mxGeometry x="415" y="452" width="40" height="24" as="geometry" />
+        </mxCell>
+        <mxCell id="m-fecha-1" value="1" style="text;html=0;whiteSpace=wrap;align=center;verticalAlign=middle;fontFamily=Helvetica;fontSize=14;fontColor=#000000;fontStyle=0;" parent="1" vertex="1">
+          <mxGeometry x="562" y="258" width="35" height="24" as="geometry" />
+        </mxCell>
+        <mxCell id="m-fecha-n" value="0..*" style="text;html=0;whiteSpace=wrap;align=center;verticalAlign=middle;fontFamily=Helvetica;fontSize=14;fontColor=#000000;fontStyle=0;" parent="1" vertex="1">
+          <mxGeometry x="550" y="348" width="40" height="24" as="geometry" />
+        </mxCell>
+        <mxCell id="m-cat-1" value="1" style="text;html=0;whiteSpace=wrap;align=center;verticalAlign=middle;fontFamily=Helvetica;fontSize=14;fontColor=#000000;fontStyle=0;" parent="1" vertex="1">
+          <mxGeometry x="965" y="260" width="35" height="24" as="geometry" />
+        </mxCell>
+        <mxCell id="m-cat-n" value="0..*" style="text;html=0;whiteSpace=wrap;align=center;verticalAlign=middle;fontFamily=Helvetica;fontSize=14;fontColor=#000000;fontStyle=0;" parent="1" vertex="1">
+          <mxGeometry x="745" y="452" width="40" height="24" as="geometry" />
+        </mxCell>
+        <mxCell id="m-tabla-1" value="1" style="text;html=0;whiteSpace=wrap;align=center;verticalAlign=middle;fontFamily=Helvetica;fontSize=14;fontColor=#000000;fontStyle=0;" parent="1" vertex="1">
+          <mxGeometry x="1015" y="592" width="35" height="24" as="geometry" />
+        </mxCell>
+        <mxCell id="m-venta-n" value="0..*" style="text;html=0;whiteSpace=wrap;align=center;verticalAlign=middle;fontFamily=Helvetica;fontSize=14;fontColor=#000000;fontStyle=0;" parent="1" vertex="1">
+          <mxGeometry x="610" y="516" width="40" height="24" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

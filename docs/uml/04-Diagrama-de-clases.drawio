@@ -1,0 +1,210 @@
+<mxfile host="Electron" agent="5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) draw.io/14.4.3 Chrome/87.0.4280.141 Electron/11.3.0 Safari/537.36" compressed="false" modified="2026-11-18T02:13:07.308Z" version="14.4.3" etag="TRZ2i_s2LzHWQ0CNRL3H" type="device">
+  <diagram id="clases-v6" name="Clases principales V6">
+    <mxGraphModel dx="1217" dy="694" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1600" pageHeight="1310" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="titulo" value="Diagrama de clases — Data Warehouse V6" style="text;html=0;whiteSpace=wrap;align=center;verticalAlign=middle;fontFamily=Helvetica;fontSize=24;fontColor=#000000;fontStyle=1;" parent="1" vertex="1">
+          <mxGeometry x="40" y="20" width="1520" height="42" as="geometry" />
+        </mxCell>
+        <mxCell id="subtitulo" value="Clases reales del programa · Vista resumida de detalle intermedio" style="text;html=0;whiteSpace=wrap;align=center;verticalAlign=middle;fontFamily=Helvetica;fontSize=15;fontColor=#000000;fontStyle=0;" parent="1" vertex="1">
+          <mxGeometry x="40" y="70" width="1520" height="28" as="geometry" />
+        </mxCell>
+        <mxCell id="modelo-label" value="MODELO COMPARTIDO" style="text;html=0;whiteSpace=wrap;align=left;verticalAlign=middle;fontFamily=Helvetica;fontSize=14;fontColor=#000000;fontStyle=1;" parent="1" vertex="1">
+          <mxGeometry x="50" y="112" width="1470" height="28" as="geometry" />
+        </mxCell>
+        <mxCell id="contexto" value="ContextoAplicacion" style="swimlane;html=0;startSize=38;horizontal=1;rounded=0;collapsible=0;fontFamily=Helvetica;fontSize=16;fontStyle=1;align=center;fillColor=#FFFFFF;swimlaneFillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;" parent="1" vertex="1">
+          <mxGeometry x="50" y="155" width="260" height="112" as="geometry" />
+        </mxCell>
+        <mxCell id="contexto-atributos" value="+ hechos: TablaHechos" style="text;html=0;whiteSpace=wrap;align=left;verticalAlign=top;spacingLeft=12;spacingTop=7;fontFamily=Courier New;fontSize=13;fontStyle=0;fontColor=#000000;" parent="contexto" vertex="1">
+          <mxGeometry y="38" width="260" height="37" as="geometry" />
+        </mxCell>
+        <mxCell id="contexto-operaciones" value="—" style="text;html=0;whiteSpace=wrap;align=left;verticalAlign=top;spacingLeft=12;spacingTop=7;fontFamily=Courier New;fontSize=13;fontStyle=0;fontColor=#000000;" parent="contexto" vertex="1">
+          <mxGeometry y="75" width="260" height="37" as="geometry" />
+        </mxCell>
+        <mxCell id="contexto-separador" value="" style="shape=line;strokeColor=#000000;strokeWidth=1;" parent="contexto" vertex="1">
+          <mxGeometry y="75" width="260" height="1" as="geometry" />
+        </mxCell>
+        <mxCell id="tabla" value="TablaHechos" style="swimlane;html=0;startSize=38;horizontal=1;rounded=0;collapsible=0;fontFamily=Helvetica;fontSize=16;fontStyle=1;align=center;fillColor=#FFFFFF;swimlaneFillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;" parent="1" vertex="1">
+          <mxGeometry x="400" y="155" width="350" height="204" as="geometry" />
+        </mxCell>
+        <mxCell id="tabla-atributos" value="+ ventas: vector&lt;Venta&gt;&#xa;+ revision: uint64_t" style="text;html=0;whiteSpace=wrap;align=left;verticalAlign=top;spacingLeft=12;spacingTop=7;fontFamily=Courier New;fontSize=13;fontStyle=0;fontColor=#000000;" parent="tabla" vertex="1">
+          <mxGeometry y="38" width="350" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="tabla-operaciones" value="+ posicionDe(id, posicion): bool&#xa;+ obtener(id): const Venta*&#xa;+ validarInsercion(venta, ...): bool&#xa;+ insertar(venta, ...): bool" style="text;html=0;whiteSpace=wrap;align=left;verticalAlign=top;spacingLeft=12;spacingTop=7;fontFamily=Courier New;fontSize=13;fontStyle=0;fontColor=#000000;" parent="tabla" vertex="1">
+          <mxGeometry y="98" width="350" height="106" as="geometry" />
+        </mxCell>
+        <mxCell id="tabla-separador" value="" style="shape=line;strokeColor=#000000;strokeWidth=1;" parent="tabla" vertex="1">
+          <mxGeometry y="98" width="350" height="1" as="geometry" />
+        </mxCell>
+        <mxCell id="venta" value="Venta" style="swimlane;html=0;startSize=38;horizontal=1;rounded=0;collapsible=0;fontFamily=Helvetica;fontSize=16;fontStyle=1;align=center;fillColor=#FFFFFF;swimlaneFillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;" parent="1" vertex="1">
+          <mxGeometry x="845" y="155" width="300" height="227" as="geometry" />
+        </mxCell>
+        <mxCell id="venta-atributos" value="+ id: int&#xa;+ fecha: Fecha&#xa;+ sucursal: string&#xa;+ categoria: string&#xa;+ unidades: int&#xa;+ importeCentavos: int64_t" style="text;html=0;whiteSpace=wrap;align=left;verticalAlign=top;spacingLeft=12;spacingTop=7;fontFamily=Courier New;fontSize=13;fontStyle=0;fontColor=#000000;" parent="venta" vertex="1">
+          <mxGeometry y="38" width="300" height="152" as="geometry" />
+        </mxCell>
+        <mxCell id="venta-operaciones" value="—" style="text;html=0;whiteSpace=wrap;align=left;verticalAlign=top;spacingLeft=12;spacingTop=7;fontFamily=Courier New;fontSize=13;fontStyle=0;fontColor=#000000;" parent="venta" vertex="1">
+          <mxGeometry y="190" width="300" height="37" as="geometry" />
+        </mxCell>
+        <mxCell id="venta-separador" value="" style="shape=line;strokeColor=#000000;strokeWidth=1;" parent="venta" vertex="1">
+          <mxGeometry y="190" width="300" height="1" as="geometry" />
+        </mxCell>
+        <mxCell id="fecha" value="Fecha" style="swimlane;html=0;startSize=38;horizontal=1;rounded=0;collapsible=0;fontFamily=Helvetica;fontSize=16;fontStyle=1;align=center;fillColor=#FFFFFF;swimlaneFillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;" parent="1" vertex="1">
+          <mxGeometry x="1240" y="155" width="260" height="158" as="geometry" />
+        </mxCell>
+        <mxCell id="fecha-atributos" value="+ anio: int&#xa;+ mes: int&#xa;+ dia: int" style="text;html=0;whiteSpace=wrap;align=left;verticalAlign=top;spacingLeft=12;spacingTop=7;fontFamily=Courier New;fontSize=13;fontStyle=0;fontColor=#000000;" parent="fecha" vertex="1">
+          <mxGeometry y="38" width="260" height="83" as="geometry" />
+        </mxCell>
+        <mxCell id="fecha-operaciones" value="—" style="text;html=0;whiteSpace=wrap;align=left;verticalAlign=top;spacingLeft=12;spacingTop=7;fontFamily=Courier New;fontSize=13;fontStyle=0;fontColor=#000000;" parent="fecha" vertex="1">
+          <mxGeometry y="121" width="260" height="37" as="geometry" />
+        </mxCell>
+        <mxCell id="fecha-separador" value="" style="shape=line;strokeColor=#000000;strokeWidth=1;" parent="fecha" vertex="1">
+          <mxGeometry y="121" width="260" height="1" as="geometry" />
+        </mxCell>
+        <mxCell id="modulos-label" value="MÓDULOS DE CONSOLA" style="text;html=0;whiteSpace=wrap;align=left;verticalAlign=middle;fontFamily=Helvetica;fontSize=14;fontColor=#000000;fontStyle=1;" parent="1" vertex="1">
+          <mxGeometry x="50" y="485" width="1490" height="24" as="geometry" />
+        </mxCell>
+        <mxCell id="molap" value="ModuloOLAP" style="swimlane;html=0;startSize=38;horizontal=1;rounded=0;collapsible=0;fontFamily=Helvetica;fontSize=16;fontStyle=1;align=center;fillColor=#FFFFFF;swimlaneFillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;" parent="1" vertex="1">
+          <mxGeometry x="50" y="525" width="400" height="135" as="geometry" />
+        </mxCell>
+        <mxCell id="molap-atributos" value="- cubo: CuboOLAP&#xa;- filtro: FiltroVentas" style="text;html=0;whiteSpace=wrap;align=left;verticalAlign=top;spacingLeft=12;spacingTop=7;fontFamily=Courier New;fontSize=13;fontStyle=0;fontColor=#000000;" parent="molap" vertex="1">
+          <mxGeometry y="38" width="400" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="molap-operaciones" value="+ ejecutar(contexto, entrada, salida)" style="text;html=0;whiteSpace=wrap;align=left;verticalAlign=top;spacingLeft=12;spacingTop=7;fontFamily=Courier New;fontSize=13;fontStyle=0;fontColor=#000000;" parent="molap" vertex="1">
+          <mxGeometry y="98" width="400" height="37" as="geometry" />
+        </mxCell>
+        <mxCell id="molap-separador" value="" style="shape=line;strokeColor=#000000;strokeWidth=1;" parent="molap" vertex="1">
+          <mxGeometry y="98" width="400" height="1" as="geometry" />
+        </mxCell>
+        <mxCell id="mbplus" value="ModuloBPlus" style="swimlane;html=0;startSize=38;horizontal=1;rounded=0;collapsible=0;fontFamily=Helvetica;fontSize=16;fontStyle=1;align=center;fillColor=#FFFFFF;swimlaneFillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;" parent="1" vertex="1">
+          <mxGeometry x="590" y="525" width="430" height="181" as="geometry" />
+        </mxCell>
+        <mxCell id="mbplus-atributos" value="- indice: ArbolBPlus" style="text;html=0;whiteSpace=wrap;align=left;verticalAlign=top;spacingLeft=12;spacingTop=7;fontFamily=Courier New;fontSize=13;fontStyle=0;fontColor=#000000;" parent="mbplus" vertex="1">
+          <mxGeometry y="38" width="430" height="37" as="geometry" />
+        </mxCell>
+        <mxCell id="mbplus-operaciones" value="+ ejecutar(contexto, entrada, salida)&#xa;+ insertarVenta(contexto, venta, ...): bool&#xa;+ importarVentas(entrada, contexto, ...): bool&#xa;+ validarIndice(contexto, ...): bool" style="text;html=0;whiteSpace=wrap;align=left;verticalAlign=top;spacingLeft=12;spacingTop=7;fontFamily=Courier New;fontSize=13;fontStyle=0;fontColor=#000000;" parent="mbplus" vertex="1">
+          <mxGeometry y="75" width="430" height="106" as="geometry" />
+        </mxCell>
+        <mxCell id="mbplus-separador" value="" style="shape=line;strokeColor=#000000;strokeWidth=1;" parent="mbplus" vertex="1">
+          <mxGeometry y="75" width="430" height="1" as="geometry" />
+        </mxCell>
+        <mxCell id="metl" value="ModuloETL" style="swimlane;html=0;startSize=38;horizontal=1;rounded=0;collapsible=0;fontFamily=Helvetica;fontSize=16;fontStyle=1;align=center;fillColor=#FFFFFF;swimlaneFillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;" parent="1" vertex="1">
+          <mxGeometry x="1140" y="525" width="400" height="112" as="geometry" />
+        </mxCell>
+        <mxCell id="metl-atributos" value="- grafo: GrafoETL" style="text;html=0;whiteSpace=wrap;align=left;verticalAlign=top;spacingLeft=12;spacingTop=7;fontFamily=Courier New;fontSize=13;fontStyle=0;fontColor=#000000;" parent="metl" vertex="1">
+          <mxGeometry y="38" width="400" height="37" as="geometry" />
+        </mxCell>
+        <mxCell id="metl-operaciones" value="+ ejecutar(contexto, entrada, salida)" style="text;html=0;whiteSpace=wrap;align=left;verticalAlign=top;spacingLeft=12;spacingTop=7;fontFamily=Courier New;fontSize=13;fontStyle=0;fontColor=#000000;" parent="metl" vertex="1">
+          <mxGeometry y="75" width="400" height="37" as="geometry" />
+        </mxCell>
+        <mxCell id="metl-separador" value="" style="shape=line;strokeColor=#000000;strokeWidth=1;" parent="metl" vertex="1">
+          <mxGeometry y="75" width="400" height="1" as="geometry" />
+        </mxCell>
+        <mxCell id="cubo" value="CuboOLAP" style="swimlane;html=0;startSize=38;horizontal=1;rounded=0;collapsible=0;fontFamily=Helvetica;fontSize=16;fontStyle=1;align=center;fillColor=#FFFFFF;swimlaneFillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;" parent="1" vertex="1">
+          <mxGeometry x="50" y="815" width="400" height="273" as="geometry" />
+        </mxCell>
+        <mxCell id="cubo-atributos" value="- raiz: Nodo*&#xa;- ruta: vector&lt;int&gt;&#xa;- revision: uint64_t" style="text;html=0;whiteSpace=wrap;align=left;verticalAlign=top;spacingLeft=12;spacingTop=7;fontFamily=Courier New;fontSize=13;fontStyle=0;fontColor=#000000;" parent="cubo" vertex="1">
+          <mxGeometry y="38" width="400" height="83" as="geometry" />
+        </mxCell>
+        <mxCell id="cubo-operaciones" value="+ actualizar(tabla, filtro, ...): bool&#xa;+ consultarTotalFiltrado(total, ...): bool&#xa;+ consultarPeriodo(anio, mes, dia, ...): bool&#xa;+ vistaActual(vista, ...): bool&#xa;+ drillDown(valorHijo, ...): bool&#xa;+ rollUp(...): bool" style="text;html=0;whiteSpace=wrap;align=left;verticalAlign=top;spacingLeft=12;spacingTop=7;fontFamily=Courier New;fontSize=13;fontStyle=0;fontColor=#000000;" parent="cubo" vertex="1">
+          <mxGeometry y="121" width="400" height="152" as="geometry" />
+        </mxCell>
+        <mxCell id="cubo-separador" value="" style="shape=line;strokeColor=#000000;strokeWidth=1;" parent="cubo" vertex="1">
+          <mxGeometry y="121" width="400" height="1" as="geometry" />
+        </mxCell>
+        <mxCell id="arbol" value="ArbolBPlus" style="swimlane;html=0;startSize=38;horizontal=1;rounded=0;collapsible=0;fontFamily=Helvetica;fontSize=16;fontStyle=1;align=center;fillColor=#FFFFFF;swimlaneFillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;" parent="1" vertex="1">
+          <mxGeometry x="590" y="815" width="430" height="204" as="geometry" />
+        </mxCell>
+        <mxCell id="arbol-atributos" value="- raiz: Nodo*&#xa;- cantidad: size_t" style="text;html=0;whiteSpace=wrap;align=left;verticalAlign=top;spacingLeft=12;spacingTop=7;fontFamily=Courier New;fontSize=13;fontStyle=0;fontColor=#000000;" parent="arbol" vertex="1">
+          <mxGeometry y="38" width="430" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="arbol-operaciones" value="+ insertar(clave, posicion): Resultado&#xa;+ buscar(clave, posicion): bool&#xa;+ consultarRango(desde, hasta, ...): bool&#xa;+ validar(...): bool" style="text;html=0;whiteSpace=wrap;align=left;verticalAlign=top;spacingLeft=12;spacingTop=7;fontFamily=Courier New;fontSize=13;fontStyle=0;fontColor=#000000;" parent="arbol" vertex="1">
+          <mxGeometry y="98" width="430" height="106" as="geometry" />
+        </mxCell>
+        <mxCell id="arbol-separador" value="" style="shape=line;strokeColor=#000000;strokeWidth=1;" parent="arbol" vertex="1">
+          <mxGeometry y="98" width="430" height="1" as="geometry" />
+        </mxCell>
+        <mxCell id="grafo" value="GrafoETL" style="swimlane;html=0;startSize=38;horizontal=1;rounded=0;collapsible=0;fontFamily=Helvetica;fontSize=16;fontStyle=1;align=center;fillColor=#FFFFFF;swimlaneFillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;" parent="1" vertex="1">
+          <mxGeometry x="1140" y="815" width="400" height="319" as="geometry" />
+        </mxCell>
+        <mxCell id="grafo-atributos" value="- nodos: Nodo[64]&#xa;- matriz: bool[64][64]&#xa;- cantidad: size_t" style="text;html=0;whiteSpace=wrap;align=left;verticalAlign=top;spacingLeft=12;spacingTop=7;fontFamily=Courier New;fontSize=13;fontStyle=0;fontColor=#000000;" parent="grafo" vertex="1">
+          <mxGeometry y="38" width="400" height="83" as="geometry" />
+        </mxCell>
+        <mxCell id="grafo-operaciones" value="+ agregarNodo(nombre, tipo, ...): bool&#xa;+ agregarArista(origen, destino, ...): bool&#xa;+ bfs(origen, recorrido, ...): bool&#xa;+ dfs(origen, recorrido, ...): bool&#xa;+ dependencias(destino, transitivas, ...): bool&#xa;+ impacto(origen, resultado, ...): bool&#xa;+ detectarCiclo(testigo): bool&#xa;+ importarCSV(entrada, ...): bool" style="text;html=0;whiteSpace=wrap;align=left;verticalAlign=top;spacingLeft=12;spacingTop=7;fontFamily=Courier New;fontSize=13;fontStyle=0;fontColor=#000000;" parent="grafo" vertex="1">
+          <mxGeometry y="121" width="400" height="198" as="geometry" />
+        </mxCell>
+        <mxCell id="grafo-separador" value="" style="shape=line;strokeColor=#000000;strokeWidth=1;" parent="grafo" vertex="1">
+          <mxGeometry y="121" width="400" height="1" as="geometry" />
+        </mxCell>
+        <mxCell id="r-contexto-tabla" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=0;strokeColor=#000000;strokeWidth=1.5;exitX=1;exitY=0.44642857142857145;exitDx=0;exitDy=0;entryX=0;entryY=0.24509803921568626;entryDx=0;entryDy=0;startArrow=diamond;startFill=1;endArrow=none;" parent="1" source="contexto" target="tabla" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="r-tabla-venta" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=0;strokeColor=#000000;strokeWidth=1.5;exitX=1;exitY=0.24509803921568626;exitDx=0;exitDy=0;entryX=0;entryY=0.22026431718061673;entryDx=0;entryDy=0;startArrow=diamond;startFill=1;endArrow=none;" parent="1" source="tabla" target="venta" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="r-venta-fecha" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=0;strokeColor=#000000;strokeWidth=1.5;exitX=1;exitY=0.22026431718061673;exitDx=0;exitDy=0;entryX=0;entryY=0.31645569620253167;entryDx=0;entryDy=0;startArrow=diamond;startFill=1;endArrow=none;" parent="1" source="venta" target="fecha" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="r-mod-cubo" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=0;strokeColor=#000000;strokeWidth=1.5;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;startArrow=diamond;startFill=1;endArrow=none;" parent="1" source="molap" target="cubo" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="r-mod-arbol" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=0;strokeColor=#000000;strokeWidth=1.5;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;startArrow=diamond;startFill=1;endArrow=none;" parent="1" source="mbplus" target="arbol" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="r-mod-grafo" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=0;strokeColor=#000000;strokeWidth=1.5;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;startArrow=diamond;startFill=1;endArrow=none;" parent="1" source="metl" target="grafo" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="r-cubo-tabla" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=0;strokeColor=#000000;strokeWidth=1.5;exitX=1;exitY=0.14652014652014653;exitDx=0;exitDy=0;entryX=0.45714285714285713;entryY=1;entryDx=0;entryDy=0;dashed=1;startArrow=none;endArrow=open;endFill=0;" parent="1" source="cubo" target="tabla" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="505" y="855" />
+              <mxPoint x="505" y="397" />
+              <mxPoint x="560" y="397" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="r-bplus-tabla" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=0;strokeColor=#000000;strokeWidth=1.5;exitX=0.5;exitY=0;exitDx=0;exitDy=0;entryX=0.8714285714285714;entryY=1;entryDx=0;entryDy=0;dashed=1;startArrow=none;endArrow=open;endFill=0;" parent="1" source="mbplus" target="tabla" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="805" y="405" />
+              <mxPoint x="705" y="405" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="lee-hechos" value="consulta" style="text;html=0;whiteSpace=wrap;align=center;verticalAlign=middle;fontFamily=Helvetica;fontSize=13;fontColor=#000000;fontStyle=0;" parent="1" vertex="1">
+          <mxGeometry x="405" y="710" width="95" height="24" as="geometry" />
+        </mxCell>
+        <mxCell id="actualiza-hechos" value="actualiza" style="text;html=0;whiteSpace=wrap;align=left;verticalAlign=middle;fontFamily=Helvetica;fontSize=13;fontColor=#000000;fontStyle=0;" parent="1" vertex="1">
+          <mxGeometry x="820" y="382" width="100" height="24" as="geometry" />
+        </mxCell>
+        <mxCell id="cx1" value="1" style="text;html=0;whiteSpace=wrap;align=center;verticalAlign=middle;fontFamily=Helvetica;fontSize=13;fontColor=#000000;fontStyle=0;" parent="1" vertex="1">
+          <mxGeometry x="325" y="175" width="45" height="25" as="geometry" />
+        </mxCell>
+        <mxCell id="ct1" value="1" style="text;html=0;whiteSpace=wrap;align=center;verticalAlign=middle;fontFamily=Helvetica;fontSize=13;fontColor=#000000;fontStyle=0;" parent="1" vertex="1">
+          <mxGeometry x="365" y="210" width="45" height="25" as="geometry" />
+        </mxCell>
+        <mxCell id="tv1" value="1" style="text;html=0;whiteSpace=wrap;align=center;verticalAlign=middle;fontFamily=Helvetica;fontSize=13;fontColor=#000000;fontStyle=0;" parent="1" vertex="1">
+          <mxGeometry x="765" y="175" width="45" height="25" as="geometry" />
+        </mxCell>
+        <mxCell id="tvn" value="0..*" style="text;html=0;whiteSpace=wrap;align=center;verticalAlign=middle;fontFamily=Helvetica;fontSize=13;fontColor=#000000;fontStyle=0;" parent="1" vertex="1">
+          <mxGeometry x="792" y="210" width="45" height="25" as="geometry" />
+        </mxCell>
+        <mxCell id="vf1" value="1" style="text;html=0;whiteSpace=wrap;align=center;verticalAlign=middle;fontFamily=Helvetica;fontSize=13;fontColor=#000000;fontStyle=0;" parent="1" vertex="1">
+          <mxGeometry x="1160" y="175" width="45" height="25" as="geometry" />
+        </mxCell>
+        <mxCell id="ff1" value="1" style="text;html=0;whiteSpace=wrap;align=center;verticalAlign=middle;fontFamily=Helvetica;fontSize=13;fontColor=#000000;fontStyle=0;" parent="1" vertex="1">
+          <mxGeometry x="1200" y="210" width="45" height="25" as="geometry" />
+        </mxCell>
+        <mxCell id="cm1" value="1" style="text;html=0;whiteSpace=wrap;align=center;verticalAlign=middle;fontFamily=Helvetica;fontSize=13;fontColor=#000000;fontStyle=0;" parent="1" vertex="1">
+          <mxGeometry x="255" y="695" width="30" height="25" as="geometry" />
+        </mxCell>
+        <mxCell id="cm2" value="1" style="text;html=0;whiteSpace=wrap;align=center;verticalAlign=middle;fontFamily=Helvetica;fontSize=13;fontColor=#000000;fontStyle=0;" parent="1" vertex="1">
+          <mxGeometry x="810" y="735" width="30" height="25" as="geometry" />
+        </mxCell>
+        <mxCell id="cm3" value="1" style="text;html=0;whiteSpace=wrap;align=center;verticalAlign=middle;fontFamily=Helvetica;fontSize=13;fontColor=#000000;fontStyle=0;" parent="1" vertex="1">
+          <mxGeometry x="1345" y="675" width="30" height="25" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
