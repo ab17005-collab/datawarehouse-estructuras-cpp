@@ -37,7 +37,7 @@ void navegar(CuboOLAP& cubo, std::istream& in, std::ostream& out) {
 void ModuloOLAP::ejecutar(ContextoAplicacion& contexto, std::istream& in, std::ostream& out) {
     int opcion;
     while (true) {
-        out << "\n=== Cubo OLAP ===\nV5: filtros persistentes y reconstruccion por revision. Opcion 3 siempre es total global.\n1. Enviar solicitud\n2. Listar ventas\n3. Total global\n4. Mostrar jerarquia temporal\n5. Consultar periodo\n6. Navegar roll-up/drill-down\n7. Configurar filtros\n8. Total filtrado\n0. Volver\n";
+        out << "\n=== Cubo OLAP ===\nV6: filtros persistentes y actualizacion tras insercion o CSV. Opcion 3 siempre es total global.\n1. Enviar solicitud\n2. Listar ventas\n3. Total global\n4. Mostrar jerarquia temporal\n5. Consultar periodo\n6. Navegar roll-up/drill-down\n7. Configurar filtros\n8. Total filtrado\n0. Volver\n";
         if (!leerEntero(in, out, "Opcion: ", opcion) || opcion == 0) return;
         if (opcion == 1) {
             std::string valor;
