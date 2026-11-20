@@ -4,6 +4,8 @@
 #include <limits>
 #include <utility>
 #include <new>
+#include <fstream>
+#include "CSV.h"
 namespace dw { namespace bplus {
 namespace {
 void mostrarRango(const ArbolBPlus& indice, const TablaHechos& tabla, std::istream& in, std::ostream& out) {
@@ -30,7 +32,7 @@ void mostrarRango(const ArbolBPlus& indice, const TablaHechos& tabla, std::istre
 void ModuloBPlus::ejecutar(ContextoAplicacion& contexto, std::istream& in, std::ostream& out) {
     int opcion;
     while (true) {
-        out << "\n=== Arbol B+ ===\nV5: insercion compartida y validacion estructural/referencias.\n1. Enviar solicitud\n2. Indexar venta existente\n3. Buscar clave indexada\n4. Demo independiente con 40 ventas\n5. Mostrar indice actual\n6. Rango del indice actual\n7. Demo de rango con 40 ventas\n8. Insertar venta nueva\n9. Validar indice actual\n0. Volver\n";
+        out << "\n=== Arbol B+ ===\nV6: carga CSV por lote, indice B+ y ventas compartidas.\n1. Enviar solicitud\n2. Indexar venta existente\n3. Buscar clave indexada\n4. Demo independiente con 40 ventas\n5. Mostrar indice actual\n6. Rango del indice actual\n7. Demo de rango con 40 ventas\n8. Insertar venta nueva\n9. Validar indice actual\n10. Importar ventas CSV\n0. Volver\n";
         if (!leerEntero(in, out, "Opcion: ", opcion) || opcion == 0) return;
         if (opcion == 4 || opcion == 7) {
             // Tabla e indice exclusivos de la demostracion: no alteran los datos compartidos.
@@ -49,6 +51,19 @@ void ModuloBPlus::ejecutar(ContextoAplicacion& contexto, std::istream& in, std::
                     out << "Demo encontrada: " << id << '\n';
                 else out << "Error de demostracion: " << id << '\n';
             }
+            continue;
+        }
+        if (opcion == 10) {
+            std::string ruta, error;
+            if (!leerTexto(in,out,"Archivo de ventas (ejemplo data/ventas.csv): ",ruta)) return;
+            std::ifstream archivo(ruta);
+            if (!archivo) { out << "No se pudo abrir el archivo de ventas; datos sin cambios.\n"; continue; }
+            const auto antes = contexto.hechos.ventas.size();
+            try {
+                if (importarVentas(archivo,contexto,error)) out << "CSV ventas: " << contexto.hechos.ventas.size()-antes
+                    << " ventas agregadas e indexadas; revision: " << contexto.hechos.revision << '\n';
+                else out << "Carga rechazada; datos sin cambios. " << error << '\n';
+            } catch (const std::bad_alloc&) { out << "Memoria insuficiente; lote sin cambios.\n"; }
             continue;
         }
         if (opcion == 8) {
@@ -123,6 +138,29 @@ bool ModuloBPlus::validarIndice(const ContextoAplicacion& contexto, std::string&
             || contexto.hechos.ventas[entrada.posicion].id != entrada.clave) {
             error = "Referencia de indice inconsistente."; return false;
         }
+    error.clear(); return true;
+}
+
+
+bool ModuloBPlus::importarVentas(std::istream& in, ContextoAplicacion& contexto, std::string& error) {
+    std::vector<Venta> nuevas;
+    if (!leerVentasCSV(in,nuevas,error) || !validarIndice(contexto,error)) return false;
+    if (nuevas.empty()) { error.clear(); return true; }
+    TablaHechos tabla = contexto.hechos;
+    for (const auto& venta : nuevas) {
+        if (!tabla.insertar(venta,error)) { error = "Venta ID " + std::to_string(venta.id) + ": " + error; return false; }
+    }
+    ArbolBPlus candidato;
+    std::vector<EntradaIndice> actuales;
+    if (!indice_.consultarRango(1,std::numeric_limits<int>::max(),actuales,error)) return false;
+    for (const auto& entrada : actuales) candidato.insertar(entrada.clave,entrada.posicion);
+    const auto inicio = contexto.hechos.ventas.size();
+    for (std::size_t i = 0; i < nuevas.size(); ++i) candidato.insertar(nuevas[i].id,inicio+i);
+    if (!candidato.validar(error)) return false;
+    // Publicacion sin nuevas asignaciones: ambas estructuras candidatas ya son validas.
+    indice_.intercambiar(candidato);
+    contexto.hechos.ventas.swap(tabla.ventas);
+    contexto.hechos.revision = tabla.revision;
     error.clear(); return true;
 }
 

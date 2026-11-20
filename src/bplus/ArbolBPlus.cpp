@@ -2,6 +2,7 @@
 #include <ostream>
 #include <string>
 #include <algorithm>
+#include <utility>
 namespace dw { namespace bplus {
 ArbolBPlus::~ArbolBPlus() { liberar(raiz_); }
 void ArbolBPlus::liberar(Nodo* nodo) {
@@ -183,6 +184,11 @@ bool ArbolBPlus::validar(std::string& error) const {
     }
     error.clear();
     return true;
+}
+
+
+void ArbolBPlus::intercambiar(ArbolBPlus& otro) noexcept {
+    std::swap(raiz_,otro.raiz_); std::swap(cantidad_,otro.cantidad_);
 }
 
 } }
